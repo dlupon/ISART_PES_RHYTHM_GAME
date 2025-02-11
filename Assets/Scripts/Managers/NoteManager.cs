@@ -4,11 +4,8 @@ using Melanchall.DryWetMidi.Interaction;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteManager : MonoBehaviour
+public class NoteManager : MapRelated
 {
-    // -------~~~~~~~~~~================# // Components
-    private MidiManager _midiManager;
-
     // -------~~~~~~~~~~================# // Note Line
     [SerializeField] private float _lineDistance = 1f;
     [SerializeField] private Transform _lineParent;
@@ -18,26 +15,26 @@ public class NoteManager : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
     {
-        InitComponents();
+        InitLineContainer();
     }
 
     private void Start()
     {
         PlaceNotes();
-        PlaceNoteLine();
+        PlaceLine();
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Initialization
-    private void InitComponents()
+    private void InitLineContainer()
     {
-        _midiManager = GetComponent<MidiManager>();
         if (!_lineParent) _lineParent = transform;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Note
     private void PlaceNotes()
     {
-        foreach (Note lCurrentNote in _midiManager.MidiNotes) PlaceNoteOnLine(lCurrentNote);
+        foreach (Note lCurrentNote in m_map.MidiNotes)
+            PlaceNoteOnLine(lCurrentNote);
     }
 
     private void PlaceNoteOnLine(Note pNote)
@@ -62,14 +59,14 @@ public class NoteManager : MonoBehaviour
             if (lCurrentLine.ID == lWantedID) return lCurrentLine;
 
             // Create Line Before The Current One If Index Is Below
-            if (lCurrentLine.ID < lWantedID) return CreateNoteLineAt(lCurrentLineIndex, lWantedID);
+            if (lCurrentLine.ID < lWantedID) return CreateLineAt(lCurrentLineIndex, lWantedID);
         }
 
         // If Line Is Above, Then Create Line At The End Of The List
-        return CreateNoteLineAt(lLength, lWantedID);
+        return CreateLineAt(lLength, lWantedID);
     }
 
-    private NoteLine CreateNoteLineAt(int pIndex, int pID)
+    private NoteLine CreateLineAt(int pIndex, int pID)
     {
         // Prevent Out Of Range Errors
         pIndex = Mathf.Clamp(pIndex, 0, _allLine.Count);
@@ -86,7 +83,7 @@ public class NoteManager : MonoBehaviour
         return lNewLine;
     }
 
-    private void PlaceNoteLine()
+    private void PlaceLine()
     {
         int lLength = _allLine.Count;
         Transform lNoteLineTransform;
@@ -99,5 +96,4 @@ public class NoteManager : MonoBehaviour
             lNoteLineTransform.position += lLineOffset * lCurrentLineIndex;
         }
     }
-
 }

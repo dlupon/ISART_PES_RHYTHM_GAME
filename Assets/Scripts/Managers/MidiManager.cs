@@ -2,19 +2,15 @@ using Melanchall.DryWetMidi.Interaction;
 using Melanchall.DryWetMidi.Core;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Com.IsartPesRhythmGame.Managers
 {
-    public class MidiManager : MonoBehaviour
+    public class MidiManager : MapRelated
     {
-        // -------~~~~~~~~~~================# // File
-        [SerializeField] private string _fileLocation = "Assets/Assets/Midi/Into The Zone.mid";
-
         // -------~~~~~~~~~~================# // Midi
         private MidiFile _midiFile;
         private ICollection<Note> _midiNotes;
-
-        public ICollection<Note> MidiNotes => _midiNotes;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
         private void Awake()
@@ -23,13 +19,11 @@ namespace Com.IsartPesRhythmGame.Managers
         }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // File
-
-        private void StoreFile(string pFileLocation = "")
+        private void StoreFile()
         {
-            if (pFileLocation == "") pFileLocation = _fileLocation;
-
-            _midiFile = MidiFile.Read(pFileLocation);
+            _midiFile = MidiFile.Read(m_map.MidiPath);
             _midiNotes = _midiFile.GetNotes();
+            m_map.MidiNotes = _midiNotes;
         }
     }
 }

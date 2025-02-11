@@ -47,7 +47,7 @@ namespace Com.IsartPesRhythmGame.NotesSystem
             // Assign Note Properties
             lTapNote.RefNote = pNote;
             lNoteTransform.parent = _transform;
-            lNoteTransform.position = _transform.position + _transform.up * lNoteDistance * .05f;
+            lNoteTransform.position = _transform.position + _transform.forward * lNoteDistance * .05f;
         }
     }
 }
