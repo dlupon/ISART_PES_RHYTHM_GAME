@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26d384fe52b678a42b36b0be0f6c8016, type: 3}
-  m_Name: IntoTheZone
+  m_Name: Striking The Demon Down
   m_EditorClassIdentifier: 
-  _name: Into The Zone
-  _autor: Shirobon
-  _designer: Bocal
-  _bpm: 122
-  _midiPath: Assets/Assets/Midi/Into The Zone.mid
-  _song: {fileID: 8300000, guid: 7b6d3a961e35a7941b26beb3bb7129d2, type: 3}
+  _name: Striking The Demon Down
+  _autor: Deadly
+  _designer: Vhaton
+  _bpm: 124
+  _midiPath: Assets/Assets/Midi/Striking The Demon Down.mid
+  _song: {fileID: 8300000, guid: 1a644a466c0383d40bd523e6e8ec057d, type: 3}
   _lengthMultipliyer: 0.1
   MidiSegment: 0
-  Length: 4198.4004
-  LengthRatio: 0.24590164
-  SongRatio: 0.061628185
+  Length: 5561.3765
+  LengthRatio: 0
+  SongRatio: 0.13577287

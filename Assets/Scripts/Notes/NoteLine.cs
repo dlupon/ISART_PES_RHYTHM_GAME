@@ -1,32 +1,60 @@
+using Com.IsartPesRhythmGame.Managers;
 using Melanchall.DryWetMidi.Interaction;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Com.IsartPesRhythmGame.NotesSystem
+namespace Com.IsartPesRhythmGame.NoteSystem
 {
     public class NoteLine : MonoBehaviour
     {
         // -------~~~~~~~~~~================# // Components
         private Transform _transform;
 
-        // -------~~~~~~~~~~================# // Line
-        public int ID;
+        // -------~~~~~~~~~~================# // Map
+        [HideInInspector] public Map Map;
 
         // -------~~~~~~~~~~================# // Notes
+        // Notes
         [SerializeField] private GameObject _noteFactory;
         private List<TapNote> _allNotes = new List<TapNote>();
+        
+        // Line
+        [HideInInspector] public int ID;
+
+        // Motion
+        private Vector3 _startPoint;      
+        private Vector3 _endPoint;
+        private Vector3 _interpolatePoint => (_endPoint - _startPoint) * Map.SongRatio;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
         private void Awake()
         {
             InitComponents();
+            ConnectEvents();
+        }
+
+        private void Update()
+        {
+            MoveNotes();
         }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Initialization
         private void InitComponents()
         {
             _transform = transform;
-        }    
+        }
+
+        private void InitMovement()
+        {
+            _startPoint = _transform.position;
+            _endPoint = _startPoint - _transform.forward * Map.Length;
+        }
+
+        // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Events
+        private void ConnectEvents()
+        {
+            NoteManager.AllLinesPlaced.AddListener(InitMovement);
+        }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Notes
         public void Add(Note pNote)   
@@ -42,12 +70,17 @@ namespace Com.IsartPesRhythmGame.NotesSystem
             _allNotes.Add(lTapNote);
 
             // Setup Note Properties
-            long lNoteDistance = pNote.Time;
+            float lNoteDistance = pNote.Time * Map.LengthMultipliyer;
 
             // Assign Note Properties
             lTapNote.RefNote = pNote;
             lNoteTransform.parent = _transform;
-            lNoteTransform.position = _transform.position + _transform.forward * lNoteDistance * .05f;
+            lNoteTransform.position = _transform.position + _transform.forward * lNoteDistance;
+        }
+
+        private void MoveNotes()
+        {
+            _transform.position = _startPoint + _interpolatePoint;
         }
     }
 }

@@ -1,7 +1,7 @@
 using Melanchall.DryWetMidi.Interaction;
 using UnityEngine;
 
-namespace Com.IsartPesRhythmGame.NotesSystem
+namespace Com.IsartPesRhythmGame.NoteSystem
 {
     public class TapNote : MonoBehaviour
     {

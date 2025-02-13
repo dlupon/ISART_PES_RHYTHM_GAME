@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 490654079}
   - component: {fileID: 490654078}
   - component: {fileID: 490654080}
+  - component: {fileID: 490654081}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d96852593a11d4d909722542ac4a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileLocation: Assets/Assets/Midi/Into The Zone.mid
+  m_map: {fileID: 11400000, guid: d75b795bb5f36394cb5618a028becff4, type: 2}
 --- !u!4 &490654079
 Transform:
   m_ObjectHideFlags: 0
@@ -213,9 +214,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50396efd536abf149a6c12e4d060bff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_map: {fileID: 11400000, guid: d75b795bb5f36394cb5618a028becff4, type: 2}
   _lineDistance: 4
   _lineParent: {fileID: 149042625}
   _lineFactory: {fileID: 9168302248707443227, guid: 60a59932d3737c649b9cc5aa12b7d652, type: 3}
+--- !u!114 &490654081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490654077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287cfc45224b94842aa94f0dc1ab490d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_map: {fileID: 11400000, guid: d75b795bb5f36394cb5618a028becff4, type: 2}
+  _mixer: {fileID: -3414173133929283496, guid: 4e4b72d7733d82c4f9c50b4f18ab7d01, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
