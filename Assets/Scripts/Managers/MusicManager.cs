@@ -17,7 +17,6 @@ namespace Com.IsartPesRhythmGame.Managers
         // Song
         [SerializeField] private AudioMixerGroup _mixer;
         [SerializeField] private float _startSpeed = 1;
-        [SerializeField] private float test = 60;
         private AudioSource _player;
         private float _songDuration;
         private float _songRatio;

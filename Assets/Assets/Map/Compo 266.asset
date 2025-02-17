@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26d384fe52b678a42b36b0be0f6c8016, type: 3}
-  m_Name: Striking The Demon Down
+  m_Name: Compo 266
   m_EditorClassIdentifier: 
-  _name: Striking The Demon Down
-  _autor: Deadly
-  _designer: Vhaton
-  _bpm: 124
-  _midiPath: Assets/Assets/Midi/Striking The Demon Down.mid
-  _song: {fileID: 8300000, guid: 1a644a466c0383d40bd523e6e8ec057d, type: 3}
-  _lengthMultipliyer: 0.3
+  _name: Compo 266
+  _autor: Charles
+  _designer: Deadly + Bocal
+  _bpm: 157
+  _midiPath: Assets/Assets/Midi/Compo 266.mid
+  _song: {fileID: 8300000, guid: 976d1bc067a063d48a3f3e8bd8ca3acb, type: 3}
+  _lengthMultipliyer: 0.1
   MidiSegment: 0
-  Length: 16684.129
+  Length: 2868.905
   LengthRatio: 0
-  SongRatio: 0.21309641
+  SongRatio: 0.16487657

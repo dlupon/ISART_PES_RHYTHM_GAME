@@ -15,6 +15,7 @@ namespace Com.IsartPesRhythmGame.NoteSystem
 
         // -------~~~~~~~~~~================# // Notes
         // Notes
+        [SerializeField] private Transform _noteContainer;
         [SerializeField] private GameObject _noteFactory;
         private List<TapNote> _allNotes = new List<TapNote>();
         
@@ -46,7 +47,7 @@ namespace Com.IsartPesRhythmGame.NoteSystem
 
         private void InitMovement()
         {
-            _startPoint = _transform.position;
+            _startPoint = _noteContainer.position;
             _endPoint = _startPoint - _transform.forward * Map.Length;
         }
 
@@ -74,13 +75,13 @@ namespace Com.IsartPesRhythmGame.NoteSystem
 
             // Assign Note Properties
             lTapNote.RefNote = pNote;
-            lNoteTransform.parent = _transform;
-            lNoteTransform.position = _transform.position + _transform.forward * lNoteDistance;
+            lNoteTransform.parent = _noteContainer;
+            lNoteTransform.position = _noteContainer.position + _transform.forward * lNoteDistance;
         }
 
         private void MoveNotes()
         {
-            _transform.position = _startPoint + _interpolatePoint;
+            _noteContainer.position = _startPoint + _interpolatePoint;
         }
     }
 }
