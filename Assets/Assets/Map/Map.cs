@@ -1,5 +1,3 @@
-using Melanchall.DryWetMidi.Interaction;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -16,13 +14,24 @@ public class Map : ScriptableObject
     public string Deseigner => _designer;
 
     [Header("Song Properties")]
-    [SerializeField] private int _bpm;
+    [SerializeField] private float _bpm;
     [SerializeField] private string _midiPath;
+    [SerializeField] private AudioClip _song;
     
-    public int BPM => _bpm;
+    public float BPM => _bpm;
     public string MidiPath => _midiPath;
+    public AudioClip Song => _song;
+
+    [Header("Notes")]
+    [SerializeField] private float _lengthMultipliyer;
+    [HideInInspector] public float LengthMultipliyer => _lengthMultipliyer;
 
     // -------~~~~~~~~~~================# // Map
     // Midi
-    public ICollection<Note> MidiNotes;
+    [HideInInspector] public int MidiSegment;
+    [HideInInspector] public float Length;
+    [HideInInspector] public float LengthRatio;
+
+    // Song
+    [HideInInspector] public float SongRatio;
 }

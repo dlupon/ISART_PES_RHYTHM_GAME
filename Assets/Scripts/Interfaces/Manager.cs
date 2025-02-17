@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MapRelated : MonoBehaviour
+public class Manager : MonoBehaviour
 {
     [SerializeField] protected Map m_map;
 }
