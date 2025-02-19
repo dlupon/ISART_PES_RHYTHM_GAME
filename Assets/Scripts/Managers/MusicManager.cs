@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -15,27 +16,32 @@ namespace Com.IsartPesRhythmGame.Managers
         private GameObject _gameObject;
 
         // Song
+        [SerializeField] private AudioClip _countDownSound;
         [SerializeField] private AudioMixerGroup _mixer;
         [SerializeField] private float _startSpeed = 1;
-        private AudioSource _player;
+        private AudioSource _musicPlayer;
+        private AudioSource _countDownPlayer;
         private float _songDuration;
         private float _songRatio;
+
+        // State Machine
+        private Action UpdateAction;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
         private void Awake()
         {
             InitComponent();
-            InitPlayer();
+            InitPlayers();
         }
 
         private void Start()
         {
-            StartSong();
+            StartCountDown();
         }
 
         private void Update()
         {
-            UpdateSongProperties();
+            UpdateAction();
         }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Initialization
@@ -44,42 +50,72 @@ namespace Com.IsartPesRhythmGame.Managers
             _gameObject = gameObject;
         }
 
-        private void InitPlayer()
+        private void InitPlayers()
+        {
+            InitMusicPlayer();
+            InitCountDownPlayer();
+        }
+
+        private void InitMusicPlayer()
         {
             // Add Audio Source And Setup Properties
-            _player = _gameObject.AddComponent<AudioSource>();
-            _player.clip = m_map.Song;
-            _player.playOnAwake = false;
-            _player.outputAudioMixerGroup = _mixer;
-            _player.pitch = _startSpeed;
+            _musicPlayer = _gameObject.AddComponent<AudioSource>();
+            _musicPlayer.clip = m_map.Song;
+            _musicPlayer.playOnAwake = false;
+            _musicPlayer.outputAudioMixerGroup = _mixer;
+            _musicPlayer.pitch = _startSpeed;
 
             float lMusicLengthMinute = m_map.Song.length / 60f;
 
             m_map.Length = lMusicLengthMinute * m_map.BPM * MidiManager.BEAT * m_map.LengthMultipliyer;
         }
 
+        private void InitCountDownPlayer()
+        {
+            _countDownPlayer = _gameObject.AddComponent<AudioSource>();
+            _countDownPlayer.clip = _countDownSound;
+            _countDownPlayer.playOnAwake = false;
+            _countDownPlayer.outputAudioMixerGroup = _mixer;
+            _countDownPlayer.pitch = _startSpeed;
+
+            UpdateAction = UpdateCountDown;
+        }
+
+        // ----------------~~~~~~~~~~~~~~~~~~~==========================# // CountDown
+        private void StartCountDown()
+        {
+            _countDownPlayer.Play();
+        }
+
+        private void UpdateCountDown()
+        {
+            if (_countDownPlayer.isPlaying) return;
+            StartSong();
+            UpdateAction = UpdateSongProperties;
+        }
+
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Song
         private void ResetSong()
         {
             _songDuration = m_map.Song.length;
-            _player.time = 0;
+            _musicPlayer.time = 0;
         }
 
         private void StartSong()
         {
             // Reset Song Properties And Play Song
             ResetSong();
-            _player.Play();
+            _musicPlayer.Play();
 
             MusicStarted.Invoke();
         }
 
         private void UpdateSongProperties()
         {
-            if (!_player.isPlaying) return;
+            if (!_musicPlayer.isPlaying) return;
             UpdateSongRatio();
         }
 
-        private void UpdateSongRatio() => m_map.SongRatio = _songRatio = _player.time / _songDuration;
+        private void UpdateSongRatio() => m_map.SongRatio = _songRatio = _musicPlayer.time / _songDuration;
     }
 }

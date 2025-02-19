@@ -41,20 +41,10 @@ namespace Com.IsartPesRhythmGame.Managers
         {
             foreach (Note lCurrentNote in _midiNotes)
             {
-                UpdateTrackLength(lCurrentNote);
                 NoteExtractedFromMidi.Invoke(lCurrentNote);
             }
 
             MidiExtractionComplited.Invoke();
-        }
-
-        private void UpdateTrackLength(Note pNote)
-        {
-            return;
-            int lTickAmout = (int)(pNote.Time + pNote.Length);
-            if (m_map.Length >= lTickAmout) return;
-
-            m_map.Length = lTickAmout;
         }
     }
 }

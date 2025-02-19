@@ -18,8 +18,8 @@ MonoBehaviour:
   _bpm: 157
   _midiPath: Assets/Assets/Midi/Compo 266.mid
   _song: {fileID: 8300000, guid: 976d1bc067a063d48a3f3e8bd8ca3acb, type: 3}
-  _lengthMultipliyer: 0.1
+  _lengthMultipliyer: 0.2
   MidiSegment: 0
-  Length: 2868.905
+  Length: 5737.81
   LengthRatio: 0
-  SongRatio: 0.16487657
+  SongRatio: 0.9999689

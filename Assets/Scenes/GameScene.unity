@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_map: {fileID: 11400000, guid: b895d5ecbe2c6054698770ab334afde9, type: 2}
+  _countDownSound: {fileID: 8300000, guid: 3c264d8ade3fa4241a0f42ab3a0f2ae8, type: 3}
   _mixer: {fileID: -3414173133929283496, guid: 4e4b72d7733d82c4f9c50b4f18ab7d01, type: 2}
   _startSpeed: 1
 --- !u!1 &519420028
