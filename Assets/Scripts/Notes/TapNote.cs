@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Melanchall.DryWetMidi.Interaction;
-using UnityEditor.Search;
 using UnityEngine;
 
 namespace Com.IsartPesRhythmGame.NoteSystem
@@ -14,6 +13,7 @@ namespace Com.IsartPesRhythmGame.NoteSystem
         [SerializeField] private Transform _renderTransform;
         [SerializeField] private AudioSource _audioSource;
         private Vector3 _rendererDefaultPosition;
+        private Vector3 _rendererDefaultScale;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
         private void Awake()
@@ -25,14 +25,18 @@ namespace Com.IsartPesRhythmGame.NoteSystem
         private void InitRendererProperties()
         {
             _rendererDefaultPosition = _renderTransform.localPosition;
+            _rendererDefaultScale = _renderTransform.localScale;
         }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Juice
         public void Collision()
         {
-            _renderTransform.DOShakeScale(1f, 10f).SetEase(Ease.OutExpo);
-            _renderTransform.DOLocalJump(_rendererDefaultPosition, 1f, 1, 1f).SetEase(Ease.InOutExpo);
-            _renderTransform.DORotateQuaternion(Quaternion.AngleAxis(180f, Vector2.up), 1f).SetEase(Ease.OutExpo);
+            Vector3 lScale = Vector3.zero;
+            lScale.x = _rendererDefaultScale.x * .5f;
+            lScale.y = _rendererDefaultScale.y * 2f;
+            lScale.z = _rendererDefaultScale.z * .5f;
+
+            _renderTransform.DOScale(_rendererDefaultScale, 1f).From(lScale).SetEase(Ease.OutElastic);
 
             _audioSource.Play();
         }
